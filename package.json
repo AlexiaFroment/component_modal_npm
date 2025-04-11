@@ -1,5 +1,5 @@
 {
-  "name": "@aloasdev/modal_component",
+  "name": "modal_component",
   "private": false,
   "version": "1.0.0",
   "main": "./dist/index.js",
