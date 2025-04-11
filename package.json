@@ -38,7 +38,8 @@
     "react-modal",
     "typescript"
   ],
-  "github": {
-    "url": "https://github.com/AlexiaFroment/P14_HRNet"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AlexiaFroment/component_modal_npm.git"
   }
 }
