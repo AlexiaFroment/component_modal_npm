@@ -1,5 +1,8 @@
 import { ModalProps } from "../_types/interfaces"
-import "../styles/modal.css"
+import styleInject from "style-inject"
+import css from "../styles/modal.css?inline"
+
+styleInject(css)
 
 export default function Modal({ isOpen, onClose, children }: ModalProps) {
   return (
