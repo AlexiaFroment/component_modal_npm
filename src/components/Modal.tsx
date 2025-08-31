@@ -4,11 +4,19 @@ import css from "../styles/modal.css?inline"
 
 styleInject(css)
 
-export default function Modal({ isOpen, onClose, children }: ModalProps) {
+export default function Modal({
+  isOpen,
+  onClose,
+  children,
+  overlayColor = "rgba(0, 0, 0, 0.75)",
+}: ModalProps) {
   return (
     isOpen && (
-      <div className='overlay'>
-        <div className='modal-content'>
+      <div
+        className='overlay'
+        style={{ backgroundColor: overlayColor }}
+        onClick={onClose}>
+        <div className='modal-content' onClick={(e) => e.stopPropagation()}>
           {" "}
           {children}
           <button className='closeBtn' onClick={onClose}>

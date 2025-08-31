@@ -1,54 +1,87 @@
-# React + TypeScript + Vite
+# React Modal Component
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Un composant **Modal React** prêt à l'emploi avec **TypeScript**, facile à intégrer dans ton projet. Le style est injecté automatiquement via `style-inject`, mais tu peux le **personnaliser** via des props.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 1️⃣ Installation du component
 
-## Expanding the ESLint configuration
+Installe le package avec pnpm ou npm :
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+pnpm add @aloasdev/react-modal
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+ou avec npm :
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+npm install @aloasdev/react-modal
+```
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+## 2️⃣ Importer le composant
+
+```tsx
+import Modal from "@aloasdev/react-modal"
+```
+
+## 3️⃣ Exemple d'utilisation simple
+
+```tsx
+import { useState } from "react"
+import Modal from "@aloasdev/react-modal"
+
+export default function Example() {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <>
+      <button onClick={() => setIsOpen(true)}>Open Modal</button>
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <p>Hello, this is a modal!</p>
+      </Modal>
+    </>
+  )
+}
+```
+
+## 4️⃣ Personnaliser le style
+
+### Couleur de l'overlay
+
+Tu peux changer la couleur de fond de l'overlay via la prop `overlayColor` :
+
+```tsx
+<Modal
+  isOpen={isOpen}
+  onClose={() => setIsOpen(false)}
+  overlayColor='rgba(0, 0, 255, 0.5)'>
+  <p>Hello World 🚀</p>
+</Modal>
+```
+
+## 5️⃣ Props disponibles
+
+isOpen: boolean
+onClose: () => void
+children: React.ReactNode
+overlayColor?: string
+
+## 6️⃣ Fermeture
+
+Le composant se ferme :
+
+- Au clic sur le bouton X
+- Au clic sur l'overlay (hors du contenu de la modal)
+
+Le clic à l'intérieur de la modal ne ferme pas la fenêtre grâce à `stopPropagation()`.
+
+## 7️⃣ Exemple complet avec customisation
+
+```tsx
+<Modal
+  isOpen={isModalOpen}
+  onClose={() => setIsModalOpen(false)}
+  overlayColor='rgba(255, 0, 0, 0.5)'>
+  <p>{`${currentEmployee.firstname} created with success 🎉`}</p>
+</Modal>
 ```
